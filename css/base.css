@@ -1,0 +1,119 @@
+:root {
+  /* Define our color variables here */
+
+  /* light mode */
+  --bg-color: white;
+  --text-color: #000d04;
+  /* "highlight" is an overstatement */
+  --highlight-text-color: black;
+  --muted-text-color: #404040;
+
+  --color: darkgreen;
+  --brighter-color: #8dc26e;
+  --brightest-color: forestgreen;
+}
+
+.green-filter {
+  /* As calculated by https://stackoverflow.com/a/43960991/5889131
+   * For 'forestgreen' aka rgb(34, 139, 34)
+   */
+  /*filter: invert(20%) sepia(97%) saturate(3230%) hue-rotate(124deg) brightness(100%) contrast(73%);
+
+  /* As calculated by https://stackoverflow.com/a/43960991/5889131
+   * For 'darkgreen' aka rgb(0, 100, 0)
+   */
+  filter: invert(21%) sepia(30%) saturate(6459%) hue-rotate(103deg) brightness(92%) contrast(111%);
+}
+
+
+/* Style links and hoverable elements */
+a {
+  padding: 0.125rem;
+  border-radius: 8px;
+  text-decoration: underline;
+}
+a:link,a:visited {
+  color: inherit;
+}
+a:hover {
+  /* https://html.spec.whatwg.org/multipage/rendering.html#phrasing-content-3 */
+  text-decoration: underline;
+  background-color: var(--brighter-color);
+}
+
+abbr {
+  cursor: help;
+  text-decoration: dotted underline;
+}
+
+body {
+  font-size: 16px;
+}
+hr {
+  width: 100%;
+  background-color: var(--color);
+  height: 2px;
+  border: 0;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 500;
+  color: inherit;
+}
+ul {
+  list-style: square;
+}
+li::marker {
+  color: var(--brightest-color);
+}
+
+
+body {
+  max-width: 90ch;
+  width: 95%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Common classes between header and footer */
+.banner, .links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  font-style: normal;
+  align-items: baseline;
+  /* Late 2020 hype! */
+  grid-column-gap: 1rem;
+}
+
+@media screen and (max-width: 50ch) {
+  .links {
+    flex-direction: column;
+  }
+}
+
+.banner a:link,a:visited {
+  color: inherit;
+  text-decoration: none;
+}
+
+.banner > * {
+  width: max-content;
+  flex-grow: 1;
+}
+.banner h1 {
+  margin: 1.5rem 0 0 0;
+  font-size: max(1.4rem, min(2rem, 6vw));
+}
+.bottom {
+  padding-bottom: 3rem;
+}
+hr {
+  min-width: 100%;
+}
+
+.content {
+  flex: 1;
+}

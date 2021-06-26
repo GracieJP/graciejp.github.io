@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="None">
+    <title>SVGs - Jeremy.Richards.Dev</title>
+    <meta name="description" content="How I made my site icons">
+    <link rel="stylesheet" type="text/css" href="../css/base.css" media="screen, print"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/idea.min.css"/>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script>
+
+  <link rel="icon" type="image/svg+xml" href="../img/j.svg">
+  <meta http-equiv="refresh" content="0; URL=https://jeremy.richards.dev/cv/" />
+
+</head>
+<body>
+  <section class="top banner">
+    <h1><a href="..">
+    Jeremy<wbr>.Richards<wbr>.dev
+    </a></h1>
+      <nav class="links">
+          <a href="../cv/" class="nav-link">Resume</a>
+          <a href="../contact/" class="nav-link">Contact</a>
+          <a href="../kb" class="nav-link">Knowledge Base</a>
+          <a href="../links" class="nav-link">Links</a>
+      </nav>
+  </section>
+  <hr>
+
+  <div class="box content">
+      <h1 id="svg">SVG</h1>
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Getting_Started">Mozilla Dev Docs</a> and <a href="http://thenewcode.com/28/Making-And-Deploying-SVG-Favicons">this random website</a> showed me how to make SVGs.</p>
+<p>I used <a href="https://www.w3schools.com/graphics/tryit.asp?filename=trysvg_myfirst">this sandbox</a> to try everything since it was the first sandbox I found and I decided figuring out inkscape wasn't worth the effort.</p>
+<p>The colors are HTML codes because I'm not creative. The ones that aren't are from <a href="https://superuser.com/a/1206781/809706">a SuperUser answer</a> describing terminal colors.</p>
+<p>I originally made the favicon 40x64 (golden ratio hype) but it turns out browsers only handle square favicons.
+I just centered the 40 in a 64 (added 12 to every X value) to make it work.</p>
+<p>The golden ratio for a 64 height rectangle specifies a width of 39.554 and a focal point within x in (9.334,15.108) and y in (15.108,24.446), with a center dot at roughly 10.x,17.x.
+Center dot for confirmation: <code>&lt;polygon points="22,47 22,46 23,46 23,47" fill="red" /&gt;</code></p>
+<pre><code class="language-html">&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;64&quot; height=&quot;64&quot;&gt;
+    &lt;!-- Darkmode colors --&gt;
+    &lt;polygon points=&quot;12,0 12,64 52,64 52,0&quot; fill=&quot;#282828&quot; /&gt;
+    &lt;polygon points=&quot;40,0 52,0 52,64 40,64 40,56 44,56 44,8 40,8&quot; fill=&quot;forestgreen&quot; /&gt;
+    &lt;polygon points=&quot;28,0 36,0 36,8 28,8&quot; fill=&quot;#37FF37&quot; /&gt;
+    &lt;polygon points=&quot;12,52 12,64 36,64 36,56 20,56 20,52&quot; fill=&quot;#37FF37&quot; /&gt;
+    &lt;polygon points=&quot;12,40 12,48 24,48 24,40&quot; fill=&quot;forestgreen&quot; /&gt;
+
+    &lt;!-- Lightmode colors --&gt;
+    &lt;polygon points=&quot;40,0 52,0 52,64 40,64 40,56 44,56 44,8 40,8&quot; fill=&quot;darkgreen&quot; /&gt;
+    &lt;polygon points=&quot;28,0 36,0 36,8 28,8&quot; fill=&quot;forestgreen&quot; /&gt;
+    &lt;polygon points=&quot;12,52 12,64 36,64 36,56 20,56 20,52&quot; fill=&quot;forestgreen&quot; /&gt;
+    &lt;polygon points=&quot;12,40 12,48 24,48 24,40&quot; fill=&quot;darkgreen&quot; /&gt;
+
+    Sorry, your browser does not support inline SVG.
+&lt;/svg&gt;
+</code></pre>
+  </div>
+  <hr>
+  <section class="bottom banner">
+    <p>
+    A website to showcase how little I know about web dev.
+    </p>
+    <!-- If I remove the nav, then flex-grow prevents "About" from being right-justified -->
+    <nav class="links">
+      <!-- Empty element to move "About" to the end of the box -->
+      <a></a>
+      <a href="../about">
+        About this site
+      </a>
+    </nav>
+  </section>
+
+</body>
+</html>
+<!--
+MkDocs version : 1.2.1
+Build Date UTC : 2021-06-26 23:54:01.662424+00:00
+-->

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64">
+	<polygon points="40,0 52,0 52,64 40,64 40,56 44,56 44,8 40,8" fill="forestgreen" />
+	<polygon points="28,0 36,0 36,8 28,8" fill="#37FF37" />
+	<polygon points="12,52 12,64 36,64 36,56 20,56 20,52" fill="#37FF37" />
+	<polygon points="12,40 12,48 24,48 24,40" fill="forestgreen" />
+</svg>

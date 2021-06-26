@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="None">
+    <title>HTML to PDF isn't solved - Jeremy.Richards.Dev</title>
+    <meta name="description" content="">
+    <link rel="stylesheet" type="text/css" href="../css/base.css" media="screen, print"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/idea.min.css"/>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script>
+
+  <link rel="icon" type="image/svg+xml" href="../img/j.svg">
+  <meta http-equiv="refresh" content="0; URL=https://jeremy.richards.dev/cv/" />
+
+</head>
+<body>
+  <section class="top banner">
+    <h1><a href="..">
+    Jeremy<wbr>.Richards<wbr>.dev
+    </a></h1>
+      <nav class="links">
+          <a href="../cv/" class="nav-link">Resume</a>
+          <a href="../contact/" class="nav-link">Contact</a>
+          <a href="../kb" class="nav-link">Knowledge Base</a>
+          <a href="../links" class="nav-link">Links</a>
+      </nav>
+  </section>
+  <hr>
+
+  <div class="box content">
+      <h1 id="html-to-pdf-isnt-solved">HTML to PDF isn't solved</h1>
+<p>This is just a <abbr title="Public Service Announcement">PSA</abbr> for anyone who, like me, thought otherwise.</p>
+<p><a href="https://pandoc.org/">Pandoc</a>, the go-to command-line general purpose converter, has <a href="https://pandoc.org/MANUAL.html#option--pdf-engine">this to say about HTML to PDF conversion</a>:</p>
+<blockquote>
+<p>... pandoc uses the following defaults depending on the output format specified using -t/--to ...
+* <code>-t html</code>: wkhtmltopdf (other options: prince, weasyprint; see <a href="https://print-css.rocks">print-css.rocks</a> for a good introduction to PDF generation from HTML/CSS.)</p>
+</blockquote>
+<p>First interesting point here: the people at Pandoc know PDF is a shitshow, and farm out PDF content generation to other engines depending on input type.</p>
+<p>Two hours ago, I thought that was just Pandoc not needing to reimplement a perfectly working wheel, and I could just call on <code>wkhtmltopdf</code> myself and spend more time figuring out how to use it in GitHub actions.</p>
+<h2 id="trial-page">Trial page</h2>
+<p>Here's a snippet from my garish resume as it stood when I wrote this article:
+<img alt="Screenshot of well-formatted, garishly colored colums of text" src="../img/pdf/resume_snippet.png" /></p>
+<h2 id="wkhtmltopdf">Wkhtmltopdf</h2>
+<p>It's <a href="https://wkhtmltopdf.org/">open-source</a>, it's a one-line brew (<code>brew install --cask wkhtmltopdf</code>), and the basic usage is just <code>wkhtmltopdf http://google.com google.pdf</code>.</p>
+<p>Test:</p>
+<pre><code class="language-bash">brew install --cask wkhtmltopdf
+wkhtmltopdf https://richards.dev/cv cv.pdf
+</code></pre>
+<p>Output:</p>
+<p><img alt="Wkhtmltopdf test output" src="../img/pdf/Wkhtmltopdf_test.png" /></p>
+<p>To be fair, it's... good enough for content.
+The typeface is preserved, as is the spacing between sections, and if the content had to appear in one column, that's not the worst way of doing it.</p>
+<p>That being said, the background color is gone, the skills sidebar is no longer a sidebar (since everything is one column), "<em>magna cum laude</em>" looses the bold italics to plain italics, and, of course, there is that laffy-taffy CU logo stretched across the entire page (though the height is correct, which may or may not be a selling point).</p>
+<h2 id="professional-alternatives">Professional Alternatives</h2>
+<p>At this point, I assumed that open-source was a best effort attempt that was still short of industry standards.
+In the above Pandoc quote, they explicitly call out <a href="https://print-css.rocks">print-css.rocks</a> as a good source of information on HTML to PDF conversion.
+Conveniently, PrintCSS has a <a href="https://print-css.rocks/tools">rating page of the pdf converters they'ved used</a>:</p>
+<blockquote>
+<p>PDFreactor</p>
+<p>...</p>
+<ul>
+<li>Pricing:</li>
+<li>4 CPU cores server licence: 2950 USD</li>
+<li>
+<p>Personal non-commercial licence: free</p>
+</li>
+<li>
+<p>Personal review:</p>
+</li>
+<li>
+<p>Excellent workhorse, very compliant and complete implementation of the CSS Paged Media standard.
+...</p>
+</li>
+<li>PDFreactor is now our premier choice for customer projects.</li>
+</ul>
+</blockquote>
+<p>Transitively, that's a pretty good reference.</p>
+<h2 id="pdfreactor">PDFreactor</h2>
+<p>While not nearly as easy to set up, I eventually found <a href="https://www.pdfreactor.com/samples/#tab-id-9">the samples page</a>:</p>
+<pre><code class="language-bash">&gt; curl --request POST \
+&gt;   --header &quot;Cache-Control: no-cache&quot; \
+&gt;   --header &quot;Content-Type: application/json&quot; \
+&gt;   --data '{ &quot;document&quot;: &quot;https://richards.dev/cv&quot; }' \
+&gt;   &quot;http://localhost:8080/service/rest/convert.pdf&quot; &gt; a.pdf
+</code></pre>
+<p>Which works if you have <a href="https://www.pdfreactor.com/docker/">their docker image running</a>:</p>
+<pre><code class="language-bash">docker pull realobjects/pdfreactor
+docker run -d -p 8080:9423 realobjects/pdfreactor
+</code></pre>
+<h3 id="output">Output</h3>
+<p>Honestly, this one was even worse:</p>
+<p><img alt="PDFreactor test output" src="../img/pdf/PDFreactor_test.png" /></p>
+<p>As before, we get single columns, no colors, and (not pictured) some insanely blown up icons.</p>
+<p>In addition, though, we also get extra bullet markers, whitespace issues, no font carryover, no custom bullet markers, and no custom link styling.</p>
+<p>Let's look at that price tag one final time: <strong>2950 USD</strong>.</p>
+<h2 id="conclusions">Conclusions</h2>
+<p>Don't expect PDF rendering to be easy.
+PDF is a beautiful hodgepodge of functionality and sub-versions (even worse than CSS), and flexbox probably isn't the way to go.</p>
+<p>We'll see what happens when I try this again with my simple resume.</p>
+  </div>
+  <hr>
+  <section class="bottom banner">
+    <p>
+    A website to showcase how little I know about web dev.
+    </p>
+    <!-- If I remove the nav, then flex-grow prevents "About" from being right-justified -->
+    <nav class="links">
+      <!-- Empty element to move "About" to the end of the box -->
+      <a></a>
+      <a href="../about">
+        About this site
+      </a>
+    </nav>
+  </section>
+
+</body>
+</html>
+<!--
+MkDocs version : 1.2.1
+Build Date UTC : 2021-06-26 23:54:01.660716+00:00
+-->

@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="None">
+    <title>TIL - Jeremy.Richards.Dev</title>
+    <meta name="description" content="">
+    <link rel="stylesheet" type="text/css" href="../css/base.css" media="screen, print"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/idea.min.css"/>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script>
+
+  <link rel="icon" type="image/svg+xml" href="../img/j.svg">
+  <meta http-equiv="refresh" content="0; URL=https://jeremy.richards.dev/cv/" />
+
+</head>
+<body>
+  <section class="top banner">
+    <h1><a href="..">
+    Jeremy<wbr>.Richards<wbr>.dev
+    </a></h1>
+      <nav class="links">
+          <a href="../cv/" class="nav-link">Resume</a>
+          <a href="../contact/" class="nav-link">Contact</a>
+          <a href="../kb" class="nav-link">Knowledge Base</a>
+          <a href="../links" class="nav-link">Links</a>
+      </nav>
+  </section>
+  <hr>
+
+  <div class="box content">
+      <hr />
+<p>title: Today I Learned
+description: A list of facts that interested or surprised me.</p>
+<hr />
+<h1 id="png-images-have-a-physical-size">PNG images have a physical size</h1>
+<p>PNG images can also specify a DPI, meaning a PNG file can have a physical height and width associated with it.
+This information is stored in the metadata for the image.
+Here's how to retrieve it:</p>
+<pre><code class="language-bash">xxd ~/dl/image.png | head
+00000000: 8950 4e47 0d0a 1a0a 0000 000d 4948 4452  .PNG........IHDR
+00000010: 0000 2ee0 0000 1194 0802 0000 0010 bf81  ................
+00000020: ca00 0000 0173 5247 4201 d9c9 2c7f 0000  .....sRGB...,...
+00000030: 0009 7048 5973 0000 5c46 0000 5c46 0114  ..pHYs..\F..\F..
+</code></pre>
+<p>According to <a href="http://www.libpng.org/pub/png/spec/1.2/PNG-Chunks.html#C.pHYs">the spec</a>:</p>
+<blockquote>
+<p>The pHYs chunk specifies the intended pixel size or aspect ratio for display of the image. It contains:</p>
+</blockquote>
+<p>Pixels per unit, X axis: 4 bytes (unsigned integer)
+   Pixels per unit, Y axis: 4 bytes (unsigned integer)
+   Unit specifier:          1 byte</p>
+<p>The following values are defined for the unit specifier:</p>
+<p>0: unit is unknown
+   1: unit is the meter</p>
+<p>When the unit specifier is 0, the pHYs chunk defines pixel aspect ratio only; the actual size of the pixels remains unspecified.</p>
+<p>Conversion note: one inch is equal to exactly 0.0254 meters. </p>
+  </div>
+  <hr>
+  <section class="bottom banner">
+    <p>
+    A website to showcase how little I know about web dev.
+    </p>
+    <!-- If I remove the nav, then flex-grow prevents "About" from being right-justified -->
+    <nav class="links">
+      <!-- Empty element to move "About" to the end of the box -->
+      <a></a>
+      <a href="../about">
+        About this site
+      </a>
+    </nav>
+  </section>
+
+</body>
+</html>
+<!--
+MkDocs version : 1.2.1
+Build Date UTC : 2021-06-26 23:54:01.631617+00:00
+-->
